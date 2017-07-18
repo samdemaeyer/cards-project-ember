@@ -1,0 +1,11 @@
+{{#unless hideCards}}
+  <div class="corner"><span class="value">{{card.value}}</span> {{card.suit}}</div>
+  {{#each suitsRows as |columns|}}
+    <div class="suits">
+      {{#each columns as |column|}}
+        <span class="symbol {{if isFaceCard 'big'}}">{{card.suit}}</span>
+      {{/each}}
+    </div>
+  {{/each}}
+  <div class="corner flipped"><span class="value">{{card.value}}</span> {{card.suit}}</div>
+{{/unless}}

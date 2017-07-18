@@ -1,5 +1,40 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
+<h2 class="main-title">Cards project</h2>
+<p>Use any of the buttons below to perform an action!</p>
+<div class="buttons-wrapper">
+  <button class="btn" onclick={{action 'alignCards'}}>{{if flatStyle 'Show all cards' 'Align cards'}}</button>
+  <button class="btn" onclick={{action 'sortCards'}}>{{if cardsAreGrouped 'Sort and align cards' 'Sort and group cards'}}</button>
+  <button class="btn" onclick={{action 'toggleHideCards'}}>{{if hideCards 'Show cards' 'Hide cards'}}</button>
+  <button class="btn" onclick={{action 'shuffleCards'}}>Shuffle cards</button>
+</div>
 
-{{outlet}}
+{{#unless cardsAreGrouped}}
+  <p class="pick-card-info">Feel free to pick some cards from the magician's cards</p>
+{{/unless}}
+
+{{#if pickedCards}}
+  <h3 class="subtitle">Your selected cards:</h3>
+  <div class="cards-wrapper picked">
+    {{#each pickedCards as |card cardIndex|}}
+      {{playing-card card=card cardIndex=cardIndex flatStyle=true pickAction=(action 'returnCard')}}
+    {{/each}}
+  </div>
+{{/if}}
+
+<div class="magician-cards">
+  <h3 class="subtitle">Magician's cards:</h3>
+  {{#if cardsAreGrouped}}
+    {{#each defaultCards as |groupedCards|}}
+      <div class="cards-wrapper">
+        {{#each groupedCards as |card cardIndex|}}
+          {{playing-card card=card cardIndex=cardIndex flatStyle=flatStyle hideCards=hideCards}}
+        {{/each}}
+      </div>
+    {{/each}}
+  {{else}}
+    <div class="cards-wrapper">
+      {{#each defaultCards as |card cardIndex|}}
+        {{playing-card card=card cardIndex=cardIndex flatStyle=flatStyle hideCards=hideCards pickAction=(action 'pickCard')}}
+      {{/each}}
+    </div>
+  {{/if}}
+</div>
