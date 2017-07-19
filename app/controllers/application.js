@@ -35,6 +35,7 @@ export default Controller.extend({
         }
         cards.push({ suit, value, flat: false });
       }
+      cards.push(cards.shift());
       return cards;
     });
   }),
@@ -86,6 +87,10 @@ export default Controller.extend({
     returnCard(card) {
       this.set('pickedCards', this.get('pickedCards').removeObject(card));
       this.set('defaultCards', [card, ...this.get('defaultCards')]);
+    },
+
+    sortPickedCards() {
+      this.set('pickedCards', this.get('pickedCards').sortBy('value'));
     }
   },
 

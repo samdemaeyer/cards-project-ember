@@ -13,6 +13,11 @@
 
 {{#if pickedCards}}
   <h3 class="subtitle">Your selected cards:</h3>
+  {{#if (gt pickedCards.length 1)}}
+    <div class="buttons-left">
+      <button class="btn" onclick={{action 'sortPickedCards'}}>Sort selected cards</button>
+    </div>
+  {{/if}}
   <div class="cards-wrapper picked">
     {{#each pickedCards as |card cardIndex|}}
       {{playing-card card=card cardIndex=cardIndex flatStyle=true pickAction=(action 'returnCard')}}

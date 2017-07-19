@@ -26,6 +26,8 @@ p {
   padding: 10px 0;
 }
 
+.button-left { text-align: left; }
+
 /* ------- Cards ------- */
 .cards-wrapper {
   position: relative;
@@ -151,5 +153,12 @@ p {
       left: 120%;
       transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
     }
+  }
+}
+
+.buttons-left {
+  text-align: left;
+  .btn {
+    margin: 0 0 20px 0;
   }
 }

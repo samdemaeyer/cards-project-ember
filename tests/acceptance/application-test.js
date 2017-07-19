@@ -4,7 +4,7 @@ import moduleForAcceptance from 'cards-project-ember/tests/helpers/module-for-ac
 moduleForAcceptance('Acceptance | Application');
 
 test('visiting the application', assert => {
-  let orderedCardsContend = ["1♥2♥3♥4♥5♥6♥7♥8♥9♥10♥J♥Q♥K♥", "1♠2♠3♠4♠5♠6♠7♠8♠9♠10♠J♠Q♠K♠", "1♦2♦3♦4♦5♦6♦7♦8♦9♦10♦J♦Q♦K♦", "1♣2♣3♣4♣5♣6♣7♣8♣9♣10♣J♣Q♣K♣"];
+  let orderedCardsContend = ["2♥3♥4♥5♥6♥7♥8♥9♥10♥J♥Q♥K♥1♥", "2♠3♠4♠5♠6♠7♠8♠9♠10♠J♠Q♠K♠1♠", "2♦3♦4♦5♦6♦7♦8♦9♦10♦J♦Q♦K♦1♦", "2♣3♣4♣5♣6♣7♣8♣9♣10♣J♣Q♣K♣1♣"];
   visit('/');
 
   andThen(() => {
@@ -16,16 +16,23 @@ test('visiting the application', assert => {
     assert.equal(find('.magician-cards .card:eq(1)').attr('style'), 'left: 40px;', 'Cards are inline positioned by default');
     assert.ok(find('.pick-card-info').length, 'Pick a card info rendered');
     assert.equal(find('.subtitle').text().trim(), 'Magician\'s cards:', 'Correct subtitle rendered');
-    click('.magician-cards .card:eq(0)'); // Pick '1♥'
-    click('.magician-cards .card:eq(12)'); // Pick '1♠'
+    click('.magician-cards .card:eq(0)'); // Pick '2♥'
+    click('.magician-cards .card:eq(3)'); // Pick '6♥'
+    click('.magician-cards .card:eq(12)'); // Pick '3♠'
   });
 
   andThen(() => {
-    assert.equal(find('.magician-cards .card').length, 50, '50 magician\'s cards rendered');
-    assert.equal(find('.picked .card').length, 2, '2 picked cards rendered');
-    assert.equal('1♥1♠', _mapCardValues(find('.picked .card')), 'Correct cards picked');
-    click('.picked .card:eq(0)'); // Return '1♥'
-    click('.picked .card:eq(0)'); // Return '1♠'
+    assert.equal(find('.magician-cards .card').length, 49, '49 magician\'s cards rendered');
+    assert.equal(find('.picked .card').length, 3, '3 picked cards rendered');
+    assert.equal('2♥6♥3♠', _mapCardValues(find('.picked .card')), 'Correct cards picked');
+    clickOn('Sort selected cards');
+  });
+
+  andThen(() => {
+    assert.equal('2♥3♠6♥', _mapCardValues(find('.picked .card')), 'Picked cards are sorted');
+    click('.picked .card:eq(0)'); // Return '2♥'
+    click('.picked .card:eq(0)'); // Return '3♠'
+    click('.picked .card:eq(0)'); // Return '6♥'
   });
 
   andThen(() => {
