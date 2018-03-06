@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { htmlSafe } from '@ember/string';
 import isEven from 'cards-project-ember/utils/is-even';
 
-const { computed, String: { htmlSafe } } = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   hideCards: false,
   attributeBindings: ['style'],
   classNameBindings: ['card.suit', 'flatStyle:absolute', 'hideCards:hidden-card-bg'],

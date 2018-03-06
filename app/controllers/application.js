@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { equal } from '@ember/object/computed';
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import flatten from 'cards-project-ember/utils/flatten';
-
-const { Controller, computed } = Ember
 
 export default Controller.extend({
   flatStyle: true,
@@ -17,7 +17,7 @@ export default Controller.extend({
   },
 
   // CP's
-  cardsAreGrouped: computed.equal('defaultCards.length', 4),
+  cardsAreGrouped: equal('defaultCards.length', 4),
 
   groupedCards: computed(function() {
     return this.suits.map((suit) => {
