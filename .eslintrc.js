@@ -15,6 +15,7 @@ module.exports = {
     browser: true
   },
   rules: {
+    'max-len': ['error', 120],
   },
   overrides: [
     // node files

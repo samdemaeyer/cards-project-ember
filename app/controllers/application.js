@@ -7,12 +7,13 @@ export default Controller.extend({
   flatStyle: true,
   groupedAndSorted: false,
   shuffle: false,
-  suits: ['♥', '♠', '♦', '♣'],
-  pickedCards: [],
   hideCards: false,
 
   // lifesycle hooks
   init() {
+    this._super(...arguments);
+    this.suits = ['♥', '♠', '♦', '♣'];
+    this.pickedCards = [];
     this.send('flattenAndSort');
   },
 

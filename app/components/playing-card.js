@@ -10,8 +10,8 @@ export default Component.extend({
   classNames: ['card'],
 
   click() {
-    if (this.attrs.pickAction) {
-      this.attrs.pickAction(this.get('card'));
+    if (this.get('pickAction')) {
+      this.get('pickAction')(this.get('card'));
     }
   },
 

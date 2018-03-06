@@ -1,10 +1,16 @@
 <h2 class="main-title">Cards project</h2>
 <p>Use any of the buttons below to perform an action!</p>
 <div class="buttons-wrapper">
-  <button class="btn" onclick={{action 'alignCards'}}>{{if flatStyle 'Show all cards' 'Align cards'}}</button>
-  <button class="btn" onclick={{action 'sortCards'}}>{{if cardsAreGrouped 'Sort and align cards' 'Sort and group cards'}}</button>
-  <button class="btn" onclick={{action 'toggleHideCards'}}>{{if hideCards 'Show cards' 'Hide cards'}}</button>
-  <button class="btn" onclick={{action 'shuffleCards'}}>Shuffle cards</button>
+  <button class="btn" onclick={{action 'alignCards'}} data-test-selector="align-cards">
+    {{if flatStyle 'Show all cards' 'Align cards'}}
+  </button>
+  <button class="btn" onclick={{action 'sortCards'}} data-test-selector="sort-cards">
+    {{if cardsAreGrouped 'Sort and align cards' 'Sort and group cards'}}
+  </button>
+  <button class="btn" onclick={{action 'toggleHideCards'}} data-test-selector="show-hide-cards">
+    {{if hideCards 'Show cards' 'Hide cards'}}
+  </button>
+  <button class="btn" onclick={{action 'shuffleCards'}} data-test-selector="shuffle-cards">Shuffle cards</button>
 </div>
 
 {{#unless cardsAreGrouped}}
@@ -15,7 +21,9 @@
   <h3 class="subtitle">Your selected cards:</h3>
   {{#if (gt pickedCards.length 1)}}
     <div class="buttons-left">
-      <button class="btn" onclick={{action 'sortPickedCards'}}>Sort selected cards</button>
+      <button class="btn" onclick={{action 'sortPickedCards'}} data-test-selector="sort-selected">
+        Sort selected cards
+      </button>
     </div>
   {{/if}}
   <div class="cards-wrapper picked">
